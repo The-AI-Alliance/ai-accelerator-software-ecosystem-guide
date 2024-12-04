@@ -8,7 +8,8 @@ has_children: false
 # The AI Accelerator Software Ecosystem Guide
 
 | **Authors** | [The AI Alliance Diverse Hardware Work Group](https://thealliance.ai/focus-areas/diverse-hardware){:target="ai-alliance-dhwg"} |
-| **History** | V1.0.0, 2024-09-23 |
+| **Last Update** | V1.0.0, 2024-09-23 |
+
 
 Welcome to **The AI Accelerator Software Ecosystem Guide**, an introduction to the broad topic of software tools that support seamless execution of AI workloads on different hardware accelerators.
 
@@ -26,6 +27,12 @@ Additional links:
 * [About Us]({{site.baseurl}}/about): More about the AI Alliance and this document.
 * [The AI Alliance](https://thealliance.ai){:target="ai-alliance"}
 * [This Guide's GitHub Repo](https://github.com/The-AI-Alliance/ai-accelerator-software-ecosystem-guide){:target="aseg-repo"}
+
+### Version History
+
+| Version  | Date       |
+| :------- | :--------- |
+| V1.0.0   | 2024-09-23 |
 
 <!--
 These are nice looking buttons, but using a "gratuitously different" way to show links doesn't really work...
