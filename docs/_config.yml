@@ -91,8 +91,8 @@ back_to_top_text: "Back to the top"
 # Footer last edited timestamp
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
 last_edit_time_format: "%Y-%m-%d %H:%M %z" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
-last_modified_timestamp: 2024-09-23 11:15 -0500
-last_version: 1.0.0
+last_modified_timestamp: 2024-12-06 07:30 -0500
+last_version: 1.0.1
 
 # "Edit this page on GitHub" link text
 gh_edit_link: true # show or hide edit this page link
@@ -104,9 +104,6 @@ gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into t
 
 # Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
 color_scheme: nil
-
-# Show the "contribute dataset" button
-show_contribute_dataset_button: true
 
 # Google Analytics Tracking (optional)
 # e.g, UA-1234567-89
