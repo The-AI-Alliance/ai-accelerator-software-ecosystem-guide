@@ -2,7 +2,7 @@ name: 🐞 Bug
 description: File a bug/issue
 title: "[BUG] <title>"
 labels: ["Bug", "Needs Triage"]
-assignees: []
+assignees: [deanwampler, adampingel]
 projects: 
   -
 body:
