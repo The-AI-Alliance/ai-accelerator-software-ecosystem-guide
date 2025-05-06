@@ -4,6 +4,7 @@ title: "[Task/Feature/Issue] "
 assignees: 
   - deanwampler
 projects: 
+  -
 body:
 - type: checkboxes
   attributes:
