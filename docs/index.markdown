@@ -7,9 +7,6 @@ has_children: false
 
 # The AI Accelerator Software Ecosystem Guide
 
-| **Authors** | [The AI Alliance Diverse Hardware Work Group](https://thealliance.ai/focus-areas/diverse-hardware){:target="ai-alliance-dhwg"} |
-| **Last Update** | {{site.last_version}}, {{site.last_modified_timestamp}} |
-
 Welcome to **The AI Accelerator Software Ecosystem Guide**, an introduction to the broad topic of software tools that support seamless execution of AI workloads on different hardware accelerators.
 
 > **Tip:** Use the search box at the top of this page to find specific content.
@@ -26,14 +23,3 @@ Additional links:
 * [About Us]({{site.baseurl}}/about): More about the AI Alliance and this document.
 * [The AI Alliance](https://thealliance.ai){:target="ai-alliance"}
 * [This Guide's GitHub Repo](https://github.com/The-AI-Alliance/ai-accelerator-software-ecosystem-guide){:target="aseg-repo"}
-
-### Version History
-
-| Version  | Date       |
-| :------- | :--------- |
-| V1.0.3   | 2024-08-07 |
-| V1.0.2   | 2024-06-03 |
-| V1.0.1   | 2024-12-06 |
-| V1.0.0   | 2024-09-23 |
-
-
