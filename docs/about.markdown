@@ -11,10 +11,6 @@ has_children: false
 
 If you have any questions or concerns about this effort, please contact us at [contact@thealliance.ai](mailto:contact@thealliance.ai?subject=Questions&#32;about&#32;The&#32;AI&#32;Accelerator&#32;Software&#32;Ecosystem&#32;Guide).
 
-## Maintainers of This Project
-
-Coming soon.
-
 ## Sponsoring AI Alliance Member Organizations
 
 * AMD
@@ -22,7 +18,6 @@ Coming soon.
 * Dell
 * Intel
 * Meta
-* ... more soon! ...
 
 ## Other AI Alliance Information
 
