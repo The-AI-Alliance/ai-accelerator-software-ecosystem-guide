@@ -284,7 +284,7 @@ Modular, both the company and the AI Infrastructure, is striving to reinvent the
 | Hardware Acceleration | Lower (strict functional requirements) | High (supports various frameworks and models) | High (flexible IR and scheduling) | High (Pythonic syntax, MLIR-based optimization) |
 | Flexibility | Customizable through XLA passes | Highly customizable through MLIR dialects | Customizable through schedules and templates | Customizable through MLIR dialects |
 | Customization | Large, mature (part of TensorFlow) | Growing, focus on cross-platform/hardware deployment | Large and active community, strong in research | Still developing, growing community |
-| Community and Ecosystem | High (distributed training support) | Designed for scalability across devices | Scalable (auto-tuning and distributed compilation) | High (leveraging MLIR) |
+| Community and Ecosystem | High (distributed training support) | Designed for scalability across devices | Scalable (MetaSchedule-based auto-tuning and distributed compilation) | High (leveraging MLIR) |
 | Scalability | Primarily model optimization | Deployment to diverse targets, research, production | Deployment, embedded systems, research | High-performance AI, potentially broader range later |
 
 ## ONNX: A Bridge for Interoperability in the AI Ecosystem
@@ -368,10 +368,9 @@ This offers Technical Advantages of Efficient Handling of High-Dimensional Data,
 
 ## TVM: An End-to-End Machine Learning Compiler Stack
 
-TVM is an ecosystem for compiling, optimizing, and tuning ML models produced by various frameworks, including PyTorch, TensorFlow, ONNX, Keras. The TVM compiler stack is based on IRModule to apply a series of optimizations tailored for different hardware targets. These optimizations include operator fusion, memory optimization, and hardware-specific code generation, with its own, extensible compiler infrastructure to transform the IR in various optimization stages.  TVM targets a variety of target architectures and runtimes. It has Target-Agnostic Scheduling where TVM employs a target-agnostic scheduling mechanism that separates the description of the computation from the underlying hardware details. This allows developers to optimize their models once and deploy them on different platforms without significant modifications.  
-Another component called Automatic Tuning (AutoTVM) of the TVM ecosystem is infrastructure to automatically optimize and tune models based on profiling feedback. There is also Tensor Expression Language (TE) which allows developers to express high-level computations concisely. This facilitates the exploration of different optimization strategies and enables the generation of optimized code for various hardware backends.
+TVM is an ecosystem for compiling, optimizing, and tuning ML models produced by various frameworks, including PyTorch, TensorFlow, ONNX, and Keras. In recent years, TVM has centered its compilation pipeline on IRModule（Relax + TensorIR/TIR）, enabling a staged lowering flow from graph-level transformations to tensor-program optimizations and target-specific code generation. These stages support optimizations such as operator fusion, memory planning, and backend-specific lowering across CPUs, GPUs, and specialized accelerators.
 
-TVM also includes the experimental Versatile Tensor Accelerator (VTA) optimizing compiler framework for machine learning.  VTA is built on its own compiler infrastructure, which includes its own intermediate representation, a graph optimizer, and a tensor optimizer.
+MetaSchedule is an automated, search-based optimization system used to tune TensorIR/TIR schedules via measurement and reuse of tuning results. TVM also includes a Tensor Expression Language (TE) which allows developers to express high-level computations concisely. This facilitates the exploration of different optimization strategies and enables the generation of optimized code for various hardware backends.
 
 ### Use Cases
 
@@ -379,20 +378,22 @@ TVM also includes the experimental Versatile Tensor Accelerator (VTA) optimizing
 
 **Embedded Systems:** TVM's ability to optimize models for resource-constrained devices makes it ideal for deploying AI on edge devices, such as smartphones, IoT devices, and embedded systems.
 
-**Hardware Acceleration Research:** VTA provides a platform for research and development of new AI accelerator architectures, enabling rapid prototyping and experimentation.
+**Hardware Acceleration Research:** TVM can serve as a platform for prototyping compilation strategies and evaluating accelerator-oriented optimizations.
 
 ### Ecosystem Integration
 
 TVM integrates with various tools and frameworks:
 
-* **Relay:** A functional graph intermediate representation for representing and optimizing deep learning models.  
-* **AutoScheduler:** A newer automatic scheduling system that complements AutoTVM, providing even more efficient model optimization.  
-* **Micro TVM:** A framework for deploying TVM models on bare-metal microcontrollers.  
+* **IRModule（Relax + TensorIR/TIR）:** A unified module representation used throughout TVM's compilation and lowering flow.
+* **MetaSchedule:** An automated, search-based scheduling and tuning system integrated into the TVM stack.
+* **TVM-FFI:** An open, stable C ABI and FFI convention (with language bindings) designed to simplify cross-language and cross-runtime interoperability for ML kernels and libraries.
 * **BYOC (Bring Your Own Codegen):** A mechanism for integrating custom code generators and operators into the TVM stack.
+
+References: [TVM Architecture](https://tvm.apache.org/docs/arch/index.html){:target="tvm-arch"}, [Relax](https://tvm.apache.org/docs/deep_dive/relax/index.html){:target="tvm-relax"}, [TensorIR](https://tvm.apache.org/docs/deep_dive/tensor_ir/index.html){:target="tvm-tensorir"}, [MetaSchedule API](https://tvm.apache.org/docs/reference/api/python/meta_schedule.html){:target="tvm-metaschedule"}, [TVM-FFI docs](https://tvm.apache.org/ffi/){:target="tvm-ffi"}, [TVM-FFI overview post](https://tvm.apache.org/2025/10/21/tvm-ffi){:target="tvm-ffi-post"}
 
 | Feature | XLA | IREE | TVM | PolyBlocks |
 | :---- | :---- | :---- | :---- | :---- |
-| **IR (Intermediate Representation)** | HLO (High-Level Optimizer) | MLIR (Multi-Level Intermediate Representation) | Relay (functional graph IR) | MLIR |
+| **IR (Intermediate Representation)** | HLO (High-Level Optimizer) | MLIR (Multi-Level Intermediate Representation) | IRModule（Relax + TensorIR/TIR） | MLIR |
 | **Frontends** | TensorFlow, JAX | PyTorch, TensorFlow, LiteRT, JAX, ONNX | TensorFlow, PyTorch, ONNX, Keras | PyTorch, TensorFlow, JAX |
 | **Backends** | CPUs, GPUs, TPUs | CPUs, GPUs, TPUs, some NPUs, targeting more | CPUs, GPUs, specialized accelerators | CPUs, GPUs, specialized accelerators |
 | **Focus** | Linear algebra | General-purpose ML model optimization | General-purpose ML model optimization | High-dimensional data, polyhedral optimizations |
@@ -735,6 +736,8 @@ Software innovations, including more adaptive and intuitive AI frameworks, are e
 
 Additionally, emerging standards and protocols for AI model interoperability and data handling (such as ONNX for model exchange) will play crucial roles in enhancing the synergy between diverse hardware accelerators and software tools, ensuring that AI deployments can maximize efficiency regardless of the underlying technology stack. 
 
+In recent years, open ABI/FFI efforts (for example, [TVM-FFI](https://tvm.apache.org/ffi/){:target="tvm-ffi-future"}) have also emerged to reduce point-to-point integration work between frameworks, runtimes, and kernel libraries.
+
 ### Looking Ahead: A More Unified AI Ecosystem
 
 This integration of emerging technologies will not only improve the performance and efficiency of AI models but also broaden their applicability across different sectors and complex problem domains. The future of AI hardware and software compatibility lies in a more unified ecosystem. As the technology matures, we can expect to see increased standardization, improved interoperability, and more streamlined workflows for deploying AI models across diverse hardware.
@@ -771,7 +774,7 @@ The path to optimal AI performance involves a strategic combination of hand-opti
 
 ### Automated Optimization
 
-Future development environments like Mojo and MLIR-based IREE aim to automate more critical path optimization by generating code directly through compilers, reducing reliance on pre-generated kernels. This progression extends beyond critical kernels, extending the state of the art automatic generation of interconnection logic for the entire codebase.This approach eliminates the need for manual tuning and enables the creation of highly efficient and scalable ML systems.
+Future development environments like Mojo and MLIR-based IREE aim to automate more critical path optimization by generating code directly through compilers, reducing reliance on pre-generated kernels. This progression extends beyond critical kernels, extending the state of the art automatic generation of interconnection logic for the entire codebase.This approach eliminates the need for manual tuning and enables the creation of highly efficient and scalable ML systems. In recent years, compiler stacks such as TVM have also advanced automated schedule search and measurement-driven tuning via MetaSchedule.
 
 ### Expanding Hardware Support
 
